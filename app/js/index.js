@@ -38,7 +38,8 @@ win.on('minimize', function() {
 
     // Show tray
     tray = new gui.Tray({
-        icon: './icon.png'
+        icon: './icon.png',
+        alticon: './icon.png'
     });
 
     // Show window and remove tray when clicked
