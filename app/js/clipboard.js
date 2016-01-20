@@ -11,5 +11,7 @@ module.exports = {
         } else {
             return clipboard.get(type);
         }
+    }, set: function(text, type) {
+      clipboard.set(text, type);
     }
 }
