@@ -1,16 +1,7 @@
 var util = require('util');
 var gui = require('nw.gui');
 var win = gui.Window.get();
-var clipboard = require('../js/clipboard.js');
 
-var clipboardHistory = [''];
-setInterval(function() {
-  var text = clipboard.get('text');
-  if(text !== clipboardHistory[0]) {
-    clipboardHistory.unshift(text)
-  }
-  console.log(text, clipboardHistory);
-}, 2000);
 
 var option = {
     key: "Ctrl+Shift+V",

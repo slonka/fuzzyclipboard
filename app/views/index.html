@@ -1,11 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
+
 <head>
     <title>fuzzyclipboard</title>
+
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/angular-filter/dist/angular-filter.min.js"></script>
     <script src="../js/index.js"></script>
+    <script>
+        var clipboard = require('../js/clipboard.js');
+
+        angular.module('app', ['angular.filter'])
+            .controller('CommandListController', function($interval) {
+                var commandList = this;
+
+                commandList.clipboardHistory = [{
+                    text: clipboard.get('text')
+                }];
+
+                $interval(function() {
+                    var text = clipboard.get('text');
+                    if (text !== commandList.clipboardHistory[0].text) {
+                        commandList.clipboardHistory.unshift({
+                            text: text
+                        });
+                    }
+                    if (commandList.clipboardHistory.length > 10) {
+                        commandList.clipboardHistory.length = 5
+                    }
+                }, 2000);
+            });
+    </script>
 </head>
+
 <body>
-	<h1>fuzzyclipboard</h1>
-	<p>A clipboard manager with fuzzy search capability</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input id="search" class="form-control input-lg" type="text" ng-model="search" placeholder="Search commands">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-controller="CommandListController as commandList">
+        <ul>
+            <li ng-repeat="command in commandList.clipboardHistory | fuzzyBy: 'text': search">
+                {{command.text}}
+            </li>
+        </ul>
+    </div>
 </body>
+
 </html>
