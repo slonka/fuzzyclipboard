@@ -12,6 +12,13 @@ module.exports = {
             return clipboard.get(type);
         }
     }, set: function(text, type) {
-      clipboard.set(text, type);
+        if (process.platform == 'darwin') {
+          var command = 'echo "'+text+'" | pbcopy';
+          child_process.execSync(command, {
+              encoding: 'utf8'
+          });
+        } else {
+          clipboard.set(text, type);
+        }
     }
 }
