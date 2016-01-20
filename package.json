@@ -3,19 +3,17 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  
-    "homepage": "https://github.com/slonka/fuzzyclipboard",
-    "bugs": "https://github.com/slonka/fuzzyclipboard/issues",
-    "author": {
-      "name": "Krzysztof Słonka",
-      "email": "",
-      "url": "https://github.com/slonka"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git://github.com/slonka/fuzzyclipboard.git"
-    },
-  
+  "homepage": "https://github.com/slonka/fuzzyclipboard",
+  "bugs": "https://github.com/slonka/fuzzyclipboard/issues",
+  "author": {
+    "name": "Krzysztof Słonka",
+    "email": "",
+    "url": "https://github.com/slonka"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/slonka/fuzzyclipboard.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.5",

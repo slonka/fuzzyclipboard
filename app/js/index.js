@@ -1,8 +1,16 @@
-// Load native UI library.
+var util = require('util');
 var gui = require('nw.gui');
-
-// Get the current window
 var win = gui.Window.get();
+var clipboard = require('../js/clipboard.js');
+
+var clipboardHistory = [''];
+setInterval(function() {
+  var text = clipboard.get('text');
+  if(text !== clipboardHistory[0]) {
+    clipboardHistory.unshift(text)
+  }
+  console.log(text, clipboardHistory);
+}, 2000);
 
 var option = {
     key: "Ctrl+Shift+V",
@@ -14,8 +22,6 @@ var option = {
         console.log(msg);
     }
 };
-
-var util = require('util');
 
 // Create a shortcut with |option|.
 var shortcut = new gui.Shortcut(option);
