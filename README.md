@@ -2,7 +2,8 @@
 
 ##### Clipboard manager with fuzzy search (OS X only)
 
-Press <kbd>shift</kbd> + <kbd>command</kbd> + <kbd>v</kbd>.
+Start the program, it will monitor your clipboard.
+When you need something from past press <kbd>shift</kbd> + <kbd>command</kbd> + <kbd>v</kbd>.
 Use <kbd>↑</kbd> and <kbd>↓</kbd> to naviagate the list.
 Hit <kbd>Enter</kbd> to paste.
 
