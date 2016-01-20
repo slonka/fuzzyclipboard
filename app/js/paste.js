@@ -3,7 +3,7 @@ var child_process = window.require('child_process');
 var clipboard = gui.Clipboard.get();
 
 var script = function(text) {
-  return 'osascript -e \'tell application "System Events" to keystroke tab using {command down} \n delay 1.0 \n tell application "System Events" to keystroke "'+text+'"\'';
+  return 'osascript -e \'tell application "System Events" to keystroke tab using {command down} \n delay 0.5 \n tell application "System Events" to keystroke "'+text+'"\'';
 }
 
 module.exports = function(text) {
