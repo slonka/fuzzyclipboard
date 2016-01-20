@@ -1,0 +1,7 @@
+#! /usr/bin/env node
+var shell = require('shelljs');
+var path = require('path');
+var nwPath = path.resolve(__dirname, '../node_modules/.bin/nw')
+var appPath = path.resolve(__dirname, '../app/')
+
+shell.exec(nwPath + ' ' + appPath);

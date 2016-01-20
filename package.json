@@ -1,13 +1,17 @@
 {
   "name": "fuzzyclipboard",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.1.0",
+  "description": "Clipboard manager with fuzzy search",
+  "keywords": [
+    "clipboard",
+    "manager",
+    "fuzzy search"
+  ],
   "homepage": "https://github.com/slonka/fuzzyclipboard",
   "bugs": "https://github.com/slonka/fuzzyclipboard/issues",
   "author": {
     "name": "Krzysztof Słonka",
-    "email": "",
+    "email": "krzysztof.slonka@gmail.com",
     "url": "https://github.com/slonka"
   },
   "repository": {
@@ -15,6 +19,9 @@
     "url": "git://github.com/slonka/fuzzyclipboard.git"
   },
   "dependencies": {
+    "bower": "^1.7.3",
+    "nw": "0.12.0",
+    "shelljs": "^0.5.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -30,5 +37,12 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/nw app",
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "bin": {
+    "fuzzyclipboard": "bin/fuzzyclipboard"
   }
 }
