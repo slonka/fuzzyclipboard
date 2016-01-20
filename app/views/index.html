@@ -7,41 +7,89 @@
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="../../bower_components/ng-focus-if/focusif.min.js"></script>
     <script src="../../bower_components/angular-filter/dist/angular-filter.min.js"></script>
     <script src="../js/index.js"></script>
     <script>
         var clipboard = require('../js/clipboard.js');
 
-        angular.module('app', ['angular.filter'])
-            .controller('CommandListController', function($interval) {
-                var commandList = this;
+        var app = angular.module('app', ['angular.filter', 'focus-if']);
+        app.controller('CommandListController', function($scope, $interval) {
+            var commandList = this;
 
-                commandList.clipboardHistory = [{
-                    text: clipboard.get('text')
-                }];
+            commandList.clipboardHistory = [{
+                text: clipboard.get('text')
+            }];
 
-                $interval(function() {
-                    var text = clipboard.get('text');
-                    if (text !== commandList.clipboardHistory[0].text) {
-                        commandList.clipboardHistory.unshift({
-                            text: text
-                        });
-                    }
-                    if (commandList.clipboardHistory.length > 10) {
-                        commandList.clipboardHistory.length = 5
-                    }
-                }, 2000);
+            $interval(function() {
+                var text = clipboard.get('text');
+                if (text !== commandList.clipboardHistory[0].text) {
+                    commandList.clipboardHistory.unshift({
+                        text: text
+                    });
+                }
+                if (commandList.clipboardHistory.length > 1000) {
+                    commandList.clipboardHistory.length = 500
+                }
+            }, 2000);
+
+            commandList.open = function(index) {
+                var record = $scope.shownCommands[index];
+                console.log('opening : ', record);
+            };
+
+            commandList.focusIndex = 0;
+            commandList.keys = [];
+            commandList.keys.push({
+                code: 13,
+                action: function() {
+                    commandList.open(commandList.focusIndex);
+                }
             });
+            commandList.keys.push({
+                code: 38,
+                action: function() {
+                    commandList.focusIndex--;
+                }
+            });
+            commandList.keys.push({
+                code: 40,
+                action: function() {
+                    commandList.focusIndex++;
+                }
+            });
+
+            $scope.$on('keydown', function(msg, obj) {
+                var code = obj.code;
+                commandList.keys.forEach(function(o) {
+                    if (o.code !== code) {
+                        return;
+                    }
+                    o.action();
+                    $scope.$apply();
+                });
+            });
+        });
+
+        app.directive('keyTrap', function() {
+            return function(scope, elem) {
+                elem.bind('keydown', function(event) {
+                    scope.$broadcast('keydown', {
+                        code: event.keyCode
+                    });
+                });
+            };
+        });
     </script>
 </head>
 
-<body>
-    <div class="container">
+<body key-trap>
+    <div ng-controller="CommandListController as commandList">
         <div class="row">
             <div class="col-md-6">
                 <div id="custom-search-input">
                     <div class="input-group col-md-12">
-                        <input id="search" class="form-control input-lg" type="text" ng-model="search" placeholder="Search commands">
+                        <input id="search" focus-if class="form-control input-lg" type="text" ng-model="search" placeholder="Search commands">
                         <span class="input-group-btn">
                             <button class="btn btn-info btn-lg" type="button">
                                 <i class="glyphicon glyphicon-search"></i>
@@ -51,12 +99,11 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <h1>{{commandList.focusIndex}}</h1>
 
-    <div ng-controller="CommandListController as commandList">
-        <ul>
-            <li ng-repeat="command in commandList.clipboardHistory | fuzzyBy: 'text': search">
+        <ul class="list-group">
+            <li class="list-group-item" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
                 {{command.text}}
             </li>
         </ul>

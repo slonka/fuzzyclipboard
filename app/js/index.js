@@ -6,7 +6,8 @@ var win = gui.Window.get();
 var option = {
     key: "Ctrl+Shift+V",
     active: function() {
-        console.log("Global desktop keyboard shortcut: " + this.key + " active.");
+        win.show();
+        win.focus();
     },
     failed: function(msg) {
         // :(, fail to register the |key| or couldn't parse the |key|.

@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "1.4.8",
     "angular-filter": "~0.5.8",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "ng-focus-if": "~1.0.2"
   }
 }
