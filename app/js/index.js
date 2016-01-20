@@ -16,7 +16,6 @@ var option = {
 };
 
 var util = require('util');
-console.log(util.inspect(gui));
 
 // Create a shortcut with |option|.
 var shortcut = new gui.Shortcut(option);
@@ -27,7 +26,10 @@ gui.App.registerGlobalHotKey(shortcut);
 win.on('close', function() {
     // Unregister the global desktop shortcut.
     gui.App.unregisterGlobalHotKey(shortcut);
+    this.close(true);
 });
+
+win.minimize();
 
 // Get the minimize event
 win.on('minimize', function() {
@@ -36,7 +38,7 @@ win.on('minimize', function() {
 
     // Show tray
     tray = new gui.Tray({
-        icon: 'icon.png'
+        icon: './icon.png'
     });
 
     // Show window and remove tray when clicked
