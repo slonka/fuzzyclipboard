@@ -12,6 +12,9 @@
     <script src="../js/index.js"></script>
     <script>
         var clipboard = require('../js/clipboard.js');
+        var paste = require('../js/paste.js');
+        var gui = require('nw.gui');
+        var win = gui.Window.get();
 
         var app = angular.module('app', ['angular.filter', 'focus-if']);
         app.controller('CommandListController', function($scope, $interval) {
@@ -33,9 +36,12 @@
                 }
             }, 2000);
 
-            commandList.open = function(index) {
+            commandList.paste = function(index) {
                 var record = $scope.shownCommands[index];
-                console.log('opening : ', record);
+                console.log('pasting: ', record);
+                win.blur();
+                win.hide();
+                paste(record.text);
             };
 
             commandList.focusIndex = 0;
@@ -43,7 +49,7 @@
             commandList.keys.push({
                 code: 13,
                 action: function() {
-                    commandList.open(commandList.focusIndex);
+                    commandList.paste(commandList.focusIndex);
                 }
             });
             commandList.keys.push({
@@ -99,8 +105,6 @@
                 </div>
             </div>
         </div>
-
-        <h1>{{commandList.focusIndex}}</h1>
 
         <ul class="list-group">
             <li class="list-group-item" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">

@@ -2,10 +2,9 @@ var util = require('util');
 var gui = require('nw.gui');
 var win = gui.Window.get();
 
-
 var option = {
     key: "Ctrl+Shift+V",
-    active: function() {
+    active: function(event) {
         win.show();
         win.focus();
     },
