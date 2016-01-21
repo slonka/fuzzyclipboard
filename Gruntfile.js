@@ -6,17 +6,18 @@ module.exports = function(grunt) {
   // load all grunt tasks
   require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
+  var shell = require('shelljs');
 
   // configurable paths
   var config = {
     app: 'app',
     dist: 'dist',
-    distMac32: 'dist/fuzzyclipboard/osx32',
-    distMac64: 'dist/fuzzyclipboard/osx64',
-    distLinux32: 'dist/fuzzyclipboard/linux32',
-    distLinux64: 'dist/fuzzyclipboard/linux64',
-    distWin32: 'dist/fuzzyclipboard/win32',
-    distWin64: 'dist/fuzzyclipboard/win64',
+    dist_osx32: './dist/fuzzyclipboard/osx32/',
+    dist_osx64: './dist/fuzzyclipboard/osx64/',
+    dist_linux32: './dist/fuzzyclipboard/linux32/',
+    dist_linux64: './dist/fuzzyclipboard/linux64/',
+    dist_win32: './dist/fuzzyclipboard/win32/',
+    dist_win64: './dist/fuzzyclipboard/win64/',
     tmp: 'buildTmp',
     resources: 'resources'
   };
@@ -41,6 +42,10 @@ module.exports = function(grunt) {
     return fullName;
   }
 
+  var getPlatformName = function() {
+    return getPlatformFullName(process.platform, process.arch);
+  }
+
   grunt.initConfig({
     config: config,
 
@@ -62,6 +67,21 @@ module.exports = function(grunt) {
       },
       files: '<%= config.app %>/js/*.js'
     },
+  });
+
+  grunt.registerTask('release', 'Prepare release package', function() {
+    grunt.task.run('nwjs');
+    grunt.task.run('copyIcons');
+    grunt.task.run('zipReleased');
+  });
+
+  grunt.registerTask('copyIcons', 'Copy icons to released binary', function() {
+    shell.exec('cp ./app/nw.icns ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.app/Contents/Resources/');
+    shell.exec('cp ./app/Icon? ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.app/');
+  })
+
+  grunt.registerTask('zipReleased', 'Copy icons to released binary', function() {
+    shell.exec('zip -r ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.zip ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.app ');
   });
 
   grunt.registerTask('setVersion', 'Set version to all needed files', function(version) {
