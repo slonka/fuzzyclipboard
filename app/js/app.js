@@ -24,7 +24,7 @@ app.controller('CommandListController', function($scope, $interval) {
             });
         }
         if (commandList.clipboardHistory.length > 1000) {
-            commandList.clipboardHistory.length = 500
+            commandList.clipboardHistory.pop();
         }
     }, 2000);
 
