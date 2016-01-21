@@ -5,6 +5,7 @@
     <title>fuzzyclipboard</title>
 
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
     <script src="../../bower_components/angular/angular.min.js"></script>
     <script src="../../bower_components/ng-focus-if/focusif.min.js"></script>
     <script src="../../bower_components/angular-filter/dist/angular-filter.min.js"></script>
@@ -16,11 +17,11 @@
     <div ng-controller="CommandListController as commandList">
         <div class="row">
             <div class="col-md-6">
-                <div id="custom-search-input">
+                <div class="search-history-wrapper">
                     <div class="input-group col-md-12">
-                        <input id="search" focus-if class="form-control input-lg" type="text" ng-model="search" ng-change="commandList.searchChanged()" placeholder="Search clipboard">
+                        <input id="search" focus-if class="form-control search-history no-rounded-corners input-lg" type="text" ng-model="search" ng-change="commandList.searchChanged()" placeholder="Search clipboard">
                         <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button">
+                            <button class="btn btn-info btn-lg no-rounded-corners" type="button">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
@@ -30,7 +31,7 @@
         </div>
 
         <ul class="list-group">
-            <li class="list-group-item" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
+            <li class="list-group-item command-list-item no-rounded-corners" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
                 {{command.text}}
             </li>
         </ul>

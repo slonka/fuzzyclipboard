@@ -47,13 +47,21 @@ app.controller('CommandListController', function($scope, $interval) {
     commandList.keys.push({
         code: 38,
         action: function() {
+          if(commandList.focusIndex === 0) {
+            commandList.focusIndex = $scope.shownCommands.length - 1;
+          } else {
             commandList.focusIndex--;
+          }
         }
     });
     commandList.keys.push({
         code: 40,
         action: function() {
+          if(commandList.focusIndex === $scope.shownCommands.length - 1) {
+            commandList.focusIndex = 0;
+          } else {
             commandList.focusIndex++;
+          }
         }
     });
     commandList.keys.push({

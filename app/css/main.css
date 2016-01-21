@@ -1,4 +1,5 @@
-body {
-   overflow-y: scroll ;
-   overflow-x: hidden;
+.search-history-wrapper .search-history, .list-group .command-list-item, .no-rounded-corners {
+  border-radius:                    0px;
+  -webkit-border-radius:            0px;
+  -moz-border-radius:               0px;
 }
