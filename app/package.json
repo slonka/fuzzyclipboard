@@ -1,7 +1,7 @@
 {
   "name": "fuzzyclipboard",
   "main": "views/index.html",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "single-instance": true,
   "window": {
     "title": "fuzzyclipboard",
