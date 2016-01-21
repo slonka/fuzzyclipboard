@@ -15,7 +15,7 @@ app.controller('CommandListController', function($scope, $interval) {
     $scope.$on('changedActiveItem', function() {
       if (commandList.focusIndex === 0) {
         window.scrollTo(0, 0);
-      } else if (commandList.focusIndex === $scope.shownCommands.length - 1) {
+      } else if (commandList.focusIndex >= $scope.shownCommands.length - 5) {
         window.scrollTo(0,document.body.scrollHeight);
       } else {
         document.querySelector('#cmdList li').scrollIntoView();
