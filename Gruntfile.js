@@ -22,6 +22,8 @@ module.exports = function(grunt) {
     resources: 'resources'
   };
 
+
+
   var getPlatformFullName = function(platform, architecture) {
     var fullName = '';
 
@@ -61,6 +63,10 @@ module.exports = function(grunt) {
       ]
     },
 
+    clean: {
+      release: [config['dist_' + getPlatformName()]]
+    },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -70,6 +76,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('release', 'Prepare release package', function() {
+    grunt.task.run('clean:release');
     grunt.task.run('nwjs');
     grunt.task.run('copyIcons');
     grunt.task.run('zipReleased');
@@ -81,7 +88,7 @@ module.exports = function(grunt) {
   })
 
   grunt.registerTask('zipReleased', 'Copy icons to released binary', function() {
-    shell.exec('zip -r ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.zip ' + config['dist_' + getPlatformName()] + 'fuzzyclipboard.app ');
+    shell.exec('(cd ' + config['dist_' + getPlatformName()] + ' && zip -r fuzzyclipboard.zip fuzzyclipboard.app)');
   });
 
   grunt.registerTask('setVersion', 'Set version to all needed files', function(version) {
