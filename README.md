@@ -7,7 +7,7 @@ When you need something from past press <kbd>shift</kbd> + <kbd>command</kbd> + 
 Use <kbd>↑</kbd> and <kbd>↓</kbd> to naviagate the list.
 Hit <kbd>Enter</kbd> to paste.
 
-![fuzzyclipboard - gif how it works](http://g.recordit.co/FbjSnaFPec.gif)
+![fuzzyclipboard - gif how it works](http://i.imgur.com/A5jS7KM.gif)
 
 #### Install
 
