@@ -1,7 +1,6 @@
 {
   "name": "fuzzyclipboard",
   "version": "0.1.7",
-  "directory": "app/bower_comopnents/",
   "dependencies": {
     "angular": "1.4.8",
     "angular-filter": "~0.5.8",
