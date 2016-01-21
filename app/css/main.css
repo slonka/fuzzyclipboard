@@ -3,3 +3,7 @@
   -webkit-border-radius:            0px;
   -moz-border-radius:               0px;
 }
+
+.command-list-item {
+  cursor: pointer;
+}

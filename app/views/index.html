@@ -31,7 +31,7 @@
         </div>
 
         <ul class="list-group">
-            <li class="list-group-item command-list-item no-rounded-corners" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
+            <li class="list-group-item command-list-item no-rounded-corners" ng-click="commandList.paste($index)" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
                 {{command.text}}
             </li>
         </ul>
