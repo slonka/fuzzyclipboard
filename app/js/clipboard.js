@@ -13,7 +13,7 @@ module.exports = {
         }
     }, set: function(text, type) {
         if (process.platform == 'darwin') {
-          var command = 'echo "'+text+'" | pbcopy';
+          var command = 'echo \''+text+'\' | pbcopy';
           child_process.execSync(command, {
               encoding: 'utf8'
           });
