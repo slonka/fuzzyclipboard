@@ -12,6 +12,16 @@ app.controller('CommandListController', function($scope, $interval) {
       commandList.focusIndex = 0;
     }
 
+    $scope.$on('changedActiveItem', function() {
+      if (commandList.focusIndex === 0) {
+        window.scrollTo(0, 0);
+      } else if (commandList.focusIndex === $scope.shownCommands.length - 1) {
+        window.scrollTo(0,document.body.scrollHeight);
+      } else {
+        document.querySelector('#cmdList li').scrollIntoView();
+      }
+    })
+
     commandList.clipboardHistory = [{
         text: clipboard.get('text')
     }];
@@ -52,6 +62,7 @@ app.controller('CommandListController', function($scope, $interval) {
           } else {
             commandList.focusIndex--;
           }
+          $scope.$broadcast('changedActiveItem');
         }
     });
     commandList.keys.push({
@@ -62,6 +73,7 @@ app.controller('CommandListController', function($scope, $interval) {
           } else {
             commandList.focusIndex++;
           }
+          $scope.$broadcast('changedActiveItem');
         }
     });
     commandList.keys.push({

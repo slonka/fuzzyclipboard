@@ -1,6 +1,6 @@
 {
   "name": "fuzzyclipboard",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Clipboard manager with fuzzy search (OS X only)",
   "keywords": [
     "clipboard",

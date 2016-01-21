@@ -6,4 +6,17 @@
 
 .command-list-item {
   cursor: pointer;
+  max-height: 84px;
+  overflow: hidden;
+}
+
+.scrollbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 10
+}
+
+.command-list {
+  padding-top: 46px;
 }

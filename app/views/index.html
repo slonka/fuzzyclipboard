@@ -9,13 +9,14 @@
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/ng-focus-if/focusif.min.js"></script>
     <script src="../bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <script src="../bower_components/angular-inview/angular-inview.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/app.js"></script>
 </head>
 
 <body key-trap>
     <div ng-controller="CommandListController as commandList">
-        <div class="row">
+        <div class="row scrollbar">
             <div class="col-md-6">
                 <div class="search-history-wrapper">
                     <div class="input-group col-md-12">
@@ -30,8 +31,11 @@
             </div>
         </div>
 
-        <ul class="list-group">
-            <li class="list-group-item command-list-item no-rounded-corners" ng-click="commandList.paste($index)" ng-class="{'active': $index == commandList.focusIndex }" ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
+        <ul class="list-group command-list" id="cmdList">
+            <li class="list-group-item command-list-item no-rounded-corners"
+              ng-click="commandList.paste($index)"
+              ng-class="{'active': $index == commandList.focusIndex }"
+              ng-repeat="command in (shownCommands = (commandList.clipboardHistory | fuzzyBy: 'text': search))">
                 {{command.text}}
             </li>
         </ul>
