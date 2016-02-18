@@ -13,7 +13,7 @@ Hit <kbd>Enter</kbd> to paste.
 
 ##### Download
 
-https://www.dropbox.com/s/48rszpiovannvbb/fuzzyclipboard.zip?dl=0
+https://bit.ly/fuzzyclipboard
 
 Double click on the icon (preferably add to dock)
 
